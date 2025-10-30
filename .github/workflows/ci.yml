@@ -1,0 +1,92 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: |
+        npm install
+        cd client && npm install
+    
+    - name: Create test environment file
+      run: |
+        cp .env.example .env
+    
+    - name: Initialize database
+      run: |
+        node -e "
+          const db = require('./server/database/db');
+          db.init();
+          setTimeout(() => process.exit(0), 2000);
+        "
+    
+    - name: Test API endpoints
+      run: |
+        timeout 30s node server/index.js &
+        sleep 10
+        node test-api.js
+    
+    - name: Build frontend
+      run: |
+        cd client
+        npm run build
+    
+    - name: Test scraper functionality
+      run: |
+        node test-scraper.js
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: |
+        npm install
+        cd client && npm install
+    
+    - name: Run ESLint
+      run: |
+        cd client
+        npm run lint --if-present || echo "No lint script found"
+
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Run security audit
+      run: |
+        npm audit --audit-level moderate
+        cd client && npm audit --audit-level moderate
