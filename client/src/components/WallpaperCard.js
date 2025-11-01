@@ -34,36 +34,44 @@ const WallpaperCard = ({ wallpaper }) => {
   };
 
   return (
-    <Link to={`/wallpaper/${wallpaper.id}`} className="wallpaper-card">
-      <img
-        src={wallpaper.thumbnail_url || wallpaper.image_url}
-        alt={wallpaper.title}
-        className="wallpaper-image"
-        loading="lazy"
-      />
+    <div className="wallpaper-card">
+      <Link to={`/wallpaper/${wallpaper.id}`}>
+        <img
+          src={wallpaper.thumbnail_url || wallpaper.image_url}
+          alt={wallpaper.title}
+          className="wallpaper-image"
+          loading="lazy"
+        />
+      </Link>
+      <button 
+        onClick={handleDownload} 
+        className="save-overlay"
+        data-tooltip="Save wallpaper"
+      >
+        Save
+      </button>
       <div className="wallpaper-info">
-        <h3 className="wallpaper-title">{wallpaper.title}</h3>
+        <Link to={`/wallpaper/${wallpaper.id}`} style={{ textDecoration: 'none' }}>
+          <h3 className="wallpaper-title">{wallpaper.title}</h3>
+        </Link>
         <div className="wallpaper-meta">
           <span className="category">{wallpaper.category}</span>
           <div className="wallpaper-stats">
             <span className="stat">
-              ❤️ {wallpaper.likes || 0}
-            </span>
-            <span className="stat">
-              ⬇️ {wallpaper.downloads || 0}
+              👁️ {wallpaper.downloads || 0}
             </span>
           </div>
         </div>
-        <div className="wallpaper-actions" style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
-          <button onClick={handleLike} className="btn btn-secondary" style={{ fontSize: '0.8rem', padding: '0.3rem 0.8rem' }}>
-            Like
+        <div className="wallpaper-actions">
+          <button onClick={handleLike} className="btn btn-secondary btn-small tooltip" data-tooltip="Like this wallpaper">
+            ❤️ {wallpaper.likes || 0}
           </button>
-          <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '0.8rem', padding: '0.3rem 0.8rem' }}>
-            Download
+          <button onClick={handleDownload} className="btn btn-primary btn-small tooltip" data-tooltip="Download wallpaper">
+            ⬇️ Save
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -41,20 +41,23 @@ const Home = () => {
     return (
         <div className="container">
             {/* Hero Section */}
-            <section style={{ textAlign: 'center', padding: '4rem 0' }}>
-                <h1 style={{ fontSize: '3rem', marginBottom: '1rem', background: 'linear-gradient(135deg, #ff6b6b, #ff5252)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                    Discover Amazing Wallpapers
+            <section className="hero-section">
+                <div className="floating-element"></div>
+                <div className="floating-element"></div>
+                <div className="floating-element"></div>
+                <h1 className="hero-title">
+                    📌 Discover Amazing Wallpapers
                 </h1>
-                <p style={{ fontSize: '1.2rem', color: '#888', maxWidth: '600px', margin: '0 auto' }}>
+                <p className="hero-subtitle">
                     Explore thousands of high-quality wallpapers from various categories.
-                    New wallpapers added daily automatically!
+                    New wallpapers added daily automatically with our Pinterest-style interface!
                 </p>
             </section>
 
             {/* Categories Section */}
             <section>
-                <h2 style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}>
-                    Browse Categories
+                <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', textAlign: 'center', fontWeight: '700', color: '#E60023' }}>
+                    🎨 Browse Categories
                 </h2>
                 <div className="categories-grid">
                     {categories.map(category => (
@@ -77,8 +80,8 @@ const Home = () => {
 
             {/* Featured Wallpapers */}
             <section>
-                <h2 style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}>
-                    Latest Wallpapers
+                <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', textAlign: 'center', fontWeight: '700', color: '#E60023' }}>
+                    🖼️ Latest Wallpapers
                 </h2>
                 {featuredWallpapers.length > 0 ? (
                     <div className="wallpapers-grid">
@@ -89,37 +92,39 @@ const Home = () => {
                 ) : (
                     <div style={{ textAlign: 'center', padding: '2rem', color: '#888' }}>
                         <p>No wallpapers available yet. Let's populate your site with 1000+ amazing wallpapers!</p>
-                        <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                        <div style={{ marginTop: '3rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                             <button
                                 onClick={() => {
                                     const btn = document.activeElement;
-                                    btn.textContent = '🔄 Generating wallpapers...';
+                                    btn.innerHTML = '🔄 Generating wallpapers...';
                                     btn.disabled = true;
                                     fetch(`${API_BASE_URL.replace('/api', '')}/api/scraper/populate`, { method: 'POST' })
                                         .then(() => {
-                                            btn.textContent = '✅ Done! Refreshing...';
+                                            btn.innerHTML = '✅ Done! Refreshing...';
                                             setTimeout(() => window.location.reload(), 1000);
                                         })
                                         .catch(() => {
-                                            btn.textContent = '❌ Failed - Try again';
+                                            btn.innerHTML = '❌ Failed - Try again';
                                             btn.disabled = false;
                                         });
                                 }}
                                 className="btn btn-primary"
-                                style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}
+                                style={{ fontSize: '1.2rem', padding: '1.2rem 2.5rem', borderRadius: '30px' }}
                             >
-                                🚀 Generate 1200+ Diverse Wallpapers
+                                � GGenerate 1200+ Pinterest-Style Wallpapers
                             </button>
                             <button
                                 onClick={() => fetch(`${API_BASE_URL.replace('/api', '')}/api/scraper/run`, { method: 'POST' }).then(() => window.location.reload())}
                                 className="btn btn-secondary"
+                                style={{ fontSize: '1rem', padding: '1rem 2rem', borderRadius: '30px' }}
                             >
-                                Quick Scrape (External Sources)
+                                🌐 Quick Scrape (External Sources)
                             </button>
                         </div>
-                        <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#666' }}>
-                            The generator creates 150 unique wallpapers per category (1200 total).<br />
-                            This takes about 30 seconds and provides instant variety!
+                        <p style={{ marginTop: '2rem', fontSize: '1rem', color: '#aaa', lineHeight: '1.6' }}>
+                            ✨ The generator creates 150 unique wallpapers per category (1200 total)<br />
+                            ⚡ Takes about 30 seconds and provides instant Pinterest-style variety!<br />
+                            🎨 Perfect masonry layout with dark theme and red accents
                         </p>
                     </div>
                 )}

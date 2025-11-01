@@ -5,14 +5,16 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0a0a0a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #111111;
   color: #ffffff;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 .App {
   min-height: 100vh;
+  background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
 }
 
 .main-content {
@@ -20,245 +22,750 @@ body {
   min-height: calc(100vh - 80px);
 }
 
-/* Header Styles */
+/* Header Styles - Pinterest Inspired */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #333;
+  background: rgba(17, 17, 17, 0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #2a2a2a;
   z-index: 1000;
-  padding: 1rem 0;
+  padding: 12px 0;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .header-content {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
 }
 
 .logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #ff6b6b;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #E60023;
   text-decoration: none;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo::before {
+  content: "📌";
+  font-size: 1.5rem;
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 32px;
   list-style: none;
+  align-items: center;
 }
 
 .nav-links a {
   color: #ffffff;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .nav-links a:hover {
-  color: #ff6b6b;
+  background: rgba(230, 0, 35, 0.1);
+  color: #E60023;
+  transform: translateY(-1px);
 }
 
 .search-bar {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  background: #2a2a2a;
+  border-radius: 24px;
+  padding: 4px;
+  min-width: 400px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.search-bar:focus-within {
+  border-color: #E60023;
+  box-shadow: 0 0 0 4px rgba(230, 0, 35, 0.1);
 }
 
 .search-input {
-  padding: 0.5rem 1rem;
-  border: 1px solid #333;
-  border-radius: 25px;
-  background: #1a1a1a;
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  background: transparent;
   color: #ffffff;
   outline: none;
-  width: 300px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
-.search-input:focus {
-  border-color: #ff6b6b;
+.search-input::placeholder {
+  color: #888;
 }
 
 .search-btn {
-  padding: 0.5rem 1rem;
-  background: #ff6b6b;
+  padding: 12px 20px;
+  background: #E60023;
   color: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 20px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .search-btn:hover {
-  background: #ff5252;
+  background: #c8001f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(230, 0, 35, 0.3);
+}
+
+.search-btn::before {
+  content: "🔍";
 }
 
 /* Container */
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 24px;
 }
 
-/* Category Grid */
+/* Category Grid - Pinterest Style */
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 40px 0;
 }
 
 .category-card {
-  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-  border-radius: 15px;
-  padding: 1.5rem;
+  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+  border-radius: 20px;
+  padding: 32px 24px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: 1px solid #333;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #E60023, #ff4757);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover::before {
+  transform: scaleX(1);
 }
 
 .category-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(230, 0, 35, 0.15);
+  border-color: #E60023;
 }
 
 .category-card h3 {
-  color: #ff6b6b;
-  margin-bottom: 0.5rem;
+  color: #E60023;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
-/* Wallpaper Grid */
+/* Pinterest-Style Masonry Grid */
 .wallpapers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  columns: 5;
+  column-gap: 20px;
+  margin: 40px 0;
+  padding: 0 4px;
+}
+
+@media (max-width: 1400px) {
+  .wallpapers-grid { columns: 4; }
+}
+
+@media (max-width: 1100px) {
+  .wallpapers-grid { columns: 3; }
+}
+
+@media (max-width: 800px) {
+  .wallpapers-grid { columns: 2; }
+}
+
+@media (max-width: 500px) {
+  .wallpapers-grid { columns: 1; }
 }
 
 .wallpaper-card {
-  background: #1a1a1a;
-  border-radius: 15px;
+  background: #1f1f1f;
+  border-radius: 20px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+  break-inside: avoid;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 1px solid #333;
+  border: 1px solid #2a2a2a;
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 .wallpaper-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: #E60023;
 }
 
 .wallpaper-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  height: auto;
+  display: block;
+  transition: all 0.3s ease;
+  border-radius: 20px 20px 0 0;
 }
 
 .wallpaper-card:hover .wallpaper-image {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .wallpaper-info {
-  padding: 1rem;
+  padding: 20px;
+  position: relative;
 }
 
 .wallpaper-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 12px;
   color: #ffffff;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .wallpaper-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #888;
+  margin-bottom: 16px;
 }
 
 .wallpaper-stats {
   display: flex;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .stat {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #aaa;
 }
 
-/* Buttons */
+.wallpaper-actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.wallpaper-card:hover .wallpaper-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pinterest-style overlay on hover */
+.wallpaper-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.3) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+.wallpaper-card:hover::before {
+  opacity: 1;
+}
+
+/* Category badge */
+.category {
+  background: rgba(230, 0, 35, 0.1);
+  color: #E60023;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Pinterest-Style Buttons */
 .btn {
-  padding: 0.75rem 1.5rem;
+  padding: 12px 24px;
   border: none;
-  border-radius: 25px;
+  border-radius: 24px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  font-size: 14px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #ff6b6b, #ff5252);
+  background: linear-gradient(135deg, #E60023, #c8001f);
   color: white;
+  box-shadow: 0 4px 12px rgba(230, 0, 35, 0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #ff5252, #ff4444);
+  background: linear-gradient(135deg, #c8001f, #a8001a);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(230, 0, 35, 0.4);
 }
 
 .btn-secondary {
   background: transparent;
-  color: #ff6b6b;
-  border: 2px solid #ff6b6b;
+  color: #E60023;
+  border: 2px solid #E60023;
 }
 
 .btn-secondary:hover {
-  background: #ff6b6b;
-  color: white;
+  background: rgba(230, 0, 35, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 0, 35, 0.2);
 }
 
-/* Loading */
+.btn-small {
+  padding: 8px 16px;
+  font-size: 12px;
+  border-radius: 20px;
+}
+
+/* Loading - Pinterest Style */
 .loading {
   text-align: center;
-  padding: 2rem;
+  padding: 60px 20px;
   color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-/* Responsive */
+.loading::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 3px solid #333;
+  border-top: 3px solid #E60023;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 80px 0 60px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  margin: 0 -24px 40px;
+  border-radius: 0 0 40px 40px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #E60023, #ff4757);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: #aaa;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+/* Pinterest-style floating elements */
+.floating-element {
+  position: absolute;
+  background: rgba(230, 0, 35, 0.1);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-element:nth-child(1) {
+  width: 60px;
+  height: 60px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.floating-element:nth-child(2) {
+  width: 40px;
+  height: 40px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.floating-element:nth-child(3) {
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 20px;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
-    gap: 1rem;
-    padding: 0 1rem;
+    gap: 16px;
+    padding: 0 16px;
   }
 
-  .search-input {
-    width: 250px;
+  .nav-links {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .search-bar {
+    min-width: 300px;
   }
 
   .container {
-    padding: 0 1rem;
-  }
-
-  .wallpapers-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
+    padding: 0 16px;
   }
 
   .categories-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
   }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-section {
+    padding: 60px 0 40px;
+    margin: 0 -16px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 0 12px;
+  }
+
+  .search-bar {
+    min-width: 250px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-section {
+    margin: 0 -12px 20px;
+  }
+
+  .wallpapers-grid {
+    column-gap: 12px;
+  }
+
+  .wallpaper-card {
+    margin-bottom: 12px;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E60023;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c8001f;
+}
+
+/* Pinterest-style hover effects */
+.wallpaper-card {
+  position: relative;
+}
+
+.wallpaper-card::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: #E60023;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.wallpaper-card:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Pinterest-style save button overlay */
+.save-overlay {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #E60023;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.wallpaper-card:hover .save-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced category cards */
+.category-card {
+  position: relative;
+}
+
+.category-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #E60023, #ff4757);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Improved button animations */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.btn:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Pinterest-style image loading */
+.wallpaper-image {
+  background: linear-gradient(45deg, #2a2a2a 25%, transparent 25%), 
+              linear-gradient(-45deg, #2a2a2a 25%, transparent 25%), 
+              linear-gradient(45deg, transparent 75%, #2a2a2a 75%), 
+              linear-gradient(-45deg, transparent 75%, #2a2a2a 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Pinterest-style focus states */
+.search-input:focus,
+.btn:focus {
+  outline: 2px solid #E60023;
+  outline-offset: 2px;
+}
+
+/* Enhanced loading animation */
+.loading {
+  position: relative;
+}
+
+.loading::after {
+  content: 'Loading amazing wallpapers...';
+  font-size: 1.1rem;
+  color: #E60023;
+  font-weight: 600;
+}
+
+/* Pulse animation for new content */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.wallpaper-card.new {
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* Pinterest-style tooltip */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.tooltip:hover::before {
+  opacity: 1;
 }
