@@ -1,16 +1,19 @@
-# 🖼️ Wallpaper Aggregator
+# 📌 Wallpaper Aggregator - Pinterest Style
 
-> A modern, full-stack wallpaper aggregation website that automatically fetches and displays high-quality wallpapers from multiple sources. Built for educational purposes with React, Node.js, and automated scraping capabilities.
+> A stunning Pinterest-inspired wallpaper aggregation website with dark theme and masonry layout. Features automated scraping, 1200+ wallpapers, and beautiful Pinterest-style UI with the iconic red color scheme.
 
-![Wallpaper Aggregator](https://img.shields.io/badge/Status-Active-brightgreen) ![React](https://img.shields.io/badge/React-18.x-blue) ![Node.js](https://img.shields.io/badge/Node.js-18.x-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
+![Wallpaper Aggregator](https://img.shields.io/badge/Status-Active-brightgreen) ![React](https://img.shields.io/badge/React-18.x-blue) ![Node.js](https://img.shields.io/badge/Node.js-18.x-green) ![Pinterest Style](https://img.shields.io/badge/UI-Pinterest_Style-E60023) ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## ✨ Features
 
-- 🖼️ **1000+ Wallpapers**: Automatically generates diverse wallpapers across 8 categories
-- 🎨 **Modern Dark UI**: Clean, responsive design with smooth animations
-- 🔍 **Smart Search**: Search wallpapers by keywords, categories, and tags
-- 📱 **Fully Responsive**: Perfect experience on desktop, tablet, and mobile
-- ⬇️ **Download Tracking**: Track downloads and likes for each wallpaper
+- 📌 **Pinterest-Style UI**: Authentic Pinterest design with dark theme and masonry layout
+- 🎨 **1200+ Wallpapers**: Automatically generates diverse wallpapers across 8 categories
+- 🌙 **Dark Mode Excellence**: Beautiful dark theme with Pinterest red (#E60023) accents
+- 🖼️ **True Masonry Layout**: Responsive columns that adapt like Pinterest (5→4→3→2→1)
+- 💫 **Smooth Animations**: 60fps hover effects and Pinterest-style overlays
+- 🔍 **Smart Search**: Modern search bar with Pinterest-inspired design
+- 📱 **Fully Responsive**: Perfect experience on all devices with mobile-first design
+- ⬇️ **Pinterest Interactions**: Save button overlays, like buttons, and hover effects
 - 🏷️ **8 Categories**: Nature, Abstract, Technology, Space, Animals, Cars, Gaming, Minimalist
 - 🔄 **Auto-Updates**: Scheduled scraping every 24 hours
 - 🚀 **One-Click Setup**: Populate 1200+ wallpapers instantly

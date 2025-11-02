@@ -49,8 +49,8 @@ const Home = () => {
                     📌 Discover Amazing Wallpapers
                 </h1>
                 <p className="hero-subtitle">
-                    Explore thousands of high-quality wallpapers from various categories.
-                    New wallpapers added daily automatically with our Pinterest-style interface!
+                    Experience the beauty of Pinterest-style browsing with our dark theme masonry layout.
+                    Explore 1200+ high-quality wallpapers across 8 categories with smooth animations!
                 </p>
             </section>
 
