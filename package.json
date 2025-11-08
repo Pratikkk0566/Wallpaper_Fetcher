@@ -32,7 +32,8 @@
         "build": "cd client && npm run build",
         "scraper": "node server/scraper/index.js",
         "scraper:bulk": "node server/scraper/index.js --bulk",
-        "populate": "npm run scraper:bulk",
+        "scraper:working": "node server/scraper/working-scraper.js",
+        "populate": "npm run scraper:working",
         "seed": "node server/seed-demo-data.js",
         "install-all": "npm install && cd client && npm install",
         "start": "node server/index.js"

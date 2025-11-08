@@ -85,6 +85,27 @@ app.post('/api/scraper/populate', async (req, res) => {
   }
 });
 
+// Working scraper (uses real APIs - Unsplash & Picsum)
+app.post('/api/scraper/working', async (req, res) => {
+  try {
+    console.log('Working scraper triggered - fetching real wallpapers from APIs');
+    const workingScraper = require('./scraper/working-scraper');
+    const savedCount = await workingScraper.runWorkingScraper();
+    res.json({ 
+      success: true, 
+      message: `Working scraper completed! Fetched ${savedCount} real wallpapers from Unsplash & Picsum.`,
+      savedCount 
+    });
+  } catch (error) {
+    console.error('Working scraper failed:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Working scraper failed', 
+      error: error.message 
+    });
+  }
+});
+
 // Initialize database
 db.init();
 

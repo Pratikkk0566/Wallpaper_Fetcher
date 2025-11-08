@@ -19,10 +19,14 @@ const Home = () => {
             const categoriesData = await categoriesResponse.json();
             setCategories(categoriesData);
 
-            // Fetch featured wallpapers (latest 8)
-            const wallpapersResponse = await fetch(`${API_BASE_URL}/wallpapers?limit=8&sortBy=created_at&sortOrder=DESC`);
+            // Fetch random featured wallpapers (30 different ones each time)
+            const randomPage = Math.floor(Math.random() * 10) + 1;
+            const wallpapersResponse = await fetch(`${API_BASE_URL}/wallpapers?limit=30&page=${randomPage}&sortBy=created_at&sortOrder=DESC`);
             const wallpapersData = await wallpapersResponse.json();
-            setFeaturedWallpapers(wallpapersData.wallpapers || []);
+            
+            // Shuffle wallpapers to ensure variety
+            const shuffled = (wallpapersData.wallpapers || []).sort(() => Math.random() - 0.5);
+            setFeaturedWallpapers(shuffled);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
@@ -96,12 +100,13 @@ const Home = () => {
                             <button
                                 onClick={() => {
                                     const btn = document.activeElement;
-                                    btn.innerHTML = '🔄 Generating wallpapers...';
+                                    btn.innerHTML = '🔄 Fetching real wallpapers...';
                                     btn.disabled = true;
-                                    fetch(`${API_BASE_URL.replace('/api', '')}/api/scraper/populate`, { method: 'POST' })
-                                        .then(() => {
-                                            btn.innerHTML = '✅ Done! Refreshing...';
-                                            setTimeout(() => window.location.reload(), 1000);
+                                    fetch(`${API_BASE_URL.replace('/api', '')}/api/scraper/working`, { method: 'POST' })
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            btn.innerHTML = `✅ Added ${data.savedCount} wallpapers! Refreshing...`;
+                                            setTimeout(() => window.location.reload(), 1500);
                                         })
                                         .catch(() => {
                                             btn.innerHTML = '❌ Failed - Try again';
@@ -111,7 +116,7 @@ const Home = () => {
                                 className="btn btn-primary"
                                 style={{ fontSize: '1.2rem', padding: '1.2rem 2.5rem', borderRadius: '30px' }}
                             >
-                                � GGenerate 1200+ Pinterest-Style Wallpapers
+                                📌 Fetch 240+ Real Wallpapers (Unsplash & Picsum)
                             </button>
                             <button
                                 onClick={() => fetch(`${API_BASE_URL.replace('/api', '')}/api/scraper/run`, { method: 'POST' }).then(() => window.location.reload())}
@@ -122,9 +127,9 @@ const Home = () => {
                             </button>
                         </div>
                         <p style={{ marginTop: '2rem', fontSize: '1rem', color: '#aaa', lineHeight: '1.6' }}>
-                            ✨ The generator creates 150 unique wallpapers per category (1200 total)<br />
-                            ⚡ Takes about 30 seconds and provides instant Pinterest-style variety!<br />
-                            🎨 Perfect masonry layout with dark theme and red accents
+                            ✨ Fetches real wallpapers from Unsplash & Picsum APIs (30 per category)<br />
+                            ⚡ Takes about 1-2 minutes to fetch 240 diverse, high-quality wallpapers<br />
+                            🎨 Each wallpaper is unique and different - perfect Pinterest-style variety!
                         </p>
                     </div>
                 )}
