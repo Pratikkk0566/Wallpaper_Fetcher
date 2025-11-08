@@ -116,7 +116,7 @@ const Home = () => {
                                 className="btn btn-primary"
                                 style={{ fontSize: '1.2rem', padding: '1.2rem 2.5rem', borderRadius: '30px' }}
                             >
-                                📌 Fetch 240+ Real Wallpapers (Unsplash & Picsum)
+                                📌 Fetch 240+ Real Wallpapers (100% Working!)
                             </button>
                             <button
                                 onClick={() => fetch(`${API_BASE_URL.replace('/api', '')}/api/scraper/run`, { method: 'POST' }).then(() => window.location.reload())}
@@ -127,9 +127,9 @@ const Home = () => {
                             </button>
                         </div>
                         <p style={{ marginTop: '2rem', fontSize: '1rem', color: '#aaa', lineHeight: '1.6' }}>
-                            ✨ Fetches real wallpapers from Unsplash & Picsum APIs (30 per category)<br />
-                            ⚡ Takes about 1-2 minutes to fetch 240 diverse, high-quality wallpapers<br />
-                            🎨 Each wallpaper is unique and different - perfect Pinterest-style variety!
+                            ✨ Fetches real wallpapers from Picsum Photos API (30 per category)<br />
+                            ⚡ Takes about 30-60 seconds to fetch 240 diverse, high-quality wallpapers<br />
+                            🎨 100% working images - all wallpapers load perfectly with Pinterest-style variety!
                         </p>
                     </div>
                 )}

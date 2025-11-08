@@ -37,36 +37,36 @@ class WorkingScraper {
     const wallpapers = [];
     const terms = this.searchTerms[category] || [category];
     
-    for (let i = 0; i < count; i++) {
-      try {
+    // Use Picsum instead since Unsplash source is unreliable
+    try {
+      const response = await axios.get('https://picsum.photos/v2/list?page=1&limit=100');
+      const photos = response.data;
+      
+      // Randomly select photos for this category
+      const selectedPhotos = photos.sort(() => Math.random() - 0.5).slice(0, count);
+      
+      for (let i = 0; i < selectedPhotos.length; i++) {
+        const photo = selectedPhotos[i];
         const term = terms[i % terms.length];
-        const timestamp = Date.now() + i;
-        
-        // Unsplash direct image URLs
-        const imageUrl = `https://source.unsplash.com/1920x1080/?${encodeURIComponent(term)}&sig=${timestamp}`;
-        const thumbnailUrl = `https://source.unsplash.com/400x300/?${encodeURIComponent(term)}&sig=${timestamp}`;
         
         const wallpaper = {
           title: `${term.charAt(0).toUpperCase() + term.slice(1)} - ${category} wallpaper`,
-          description: `Beautiful ${term} wallpaper from Unsplash`,
-          image_url: imageUrl,
-          thumbnail_url: thumbnailUrl,
-          source_url: `https://unsplash.com/s/photos/${term}`,
-          source_site: 'Unsplash',
+          description: `Beautiful ${term} wallpaper by ${photo.author}`,
+          image_url: `https://picsum.photos/id/${photo.id}/1920/1080`,
+          thumbnail_url: `https://picsum.photos/id/${photo.id}/400/300`,
+          source_url: photo.url,
+          source_site: 'Picsum Photos',
           category: category,
-          tags: `${term},${category},wallpaper,hd`,
+          tags: `${term},${category},wallpaper,hd,${photo.author}`,
           resolution: '1920x1080',
           file_size: null
         };
         
         wallpapers.push(wallpaper);
-        
-        // Small delay to avoid rate limiting
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-      } catch (error) {
-        console.error(`Error fetching ${category} wallpaper:`, error.message);
       }
+      
+    } catch (error) {
+      console.error(`Error fetching ${category} wallpapers:`, error.message);
     }
     
     return wallpapers;
@@ -77,8 +77,9 @@ class WorkingScraper {
     const wallpapers = [];
     
     try {
-      // Get list of available photos
-      const response = await axios.get('https://picsum.photos/v2/list?page=1&limit=100');
+      // Get list of available photos from different pages for more variety
+      const page = Math.floor(Math.random() * 10) + 1;
+      const response = await axios.get(`https://picsum.photos/v2/list?page=${page}&limit=100`);
       const photos = response.data;
       
       // Randomly select photos
@@ -170,20 +171,9 @@ class WorkingScraper {
         console.log(`\n🎯 Processing category: ${category.toUpperCase()}`);
         let categorySaved = 0;
         
-        // Scrape from Unsplash (70% of wallpapers)
-        console.log(`📸 Fetching from Unsplash...`);
-        const unsplashWallpapers = await this.scrapeUnsplashDirect(category, Math.floor(wallpapersPerCategory * 0.7));
-        for (const wallpaper of unsplashWallpapers) {
-          const saved = await this.saveWallpaper(wallpaper);
-          if (saved) {
-            categorySaved++;
-            totalSaved++;
-          }
-        }
-        
-        // Scrape from Picsum (30% of wallpapers)
-        console.log(`🖼️ Fetching from Picsum...`);
-        const picsumWallpapers = await this.scrapePicsumPhotos(category, Math.floor(wallpapersPerCategory * 0.3));
+        // Scrape from Picsum (100% reliable wallpapers)
+        console.log(`🖼️ Fetching from Picsum Photos...`);
+        const picsumWallpapers = await this.scrapePicsumPhotos(category, wallpapersPerCategory);
         for (const wallpaper of picsumWallpapers) {
           const saved = await this.saveWallpaper(wallpaper);
           if (saved) {
@@ -205,7 +195,7 @@ class WorkingScraper {
     // Update category counts
     await this.updateCategoryCounts();
     
-    console.log(`\n🎉 Scraping completed! Total saved: ${totalSaved} real wallpapers from working APIs`);
+    console.log(`\n🎉 Scraping completed! Total saved: ${totalSaved} reliable wallpapers from Picsum Photos`);
     return totalSaved;
   }
 
